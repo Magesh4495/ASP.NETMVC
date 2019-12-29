@@ -179,6 +179,7 @@
     <Content Include="Views\Home\LogIn.cshtml" />
     <Content Include="Views\Shared\Template\WelcomEmail.cshtml" />
     <Content Include="Views\Home\DashBoard.cshtml" />
+    <Content Include="Views\Shared\Error.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
