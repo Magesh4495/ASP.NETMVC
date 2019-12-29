@@ -32,6 +32,12 @@ namespace WebRegister.Controllers
             string GeneratedPassword = System.Web.Security.Membership.GeneratePassword(8, 3);
             try
             {
+                String BODY =
+                  "<h1>Greetings " + profile.UserFirstName + "</h1>" +
+                  "<p>User Name   : " + profile.UserEmailAddress + "</p>" +
+                  "<p>Password   : " + profile.LoginPassword + "</p>" +
+                  "<p>This email was sent through the " +
+                  "using the .NET System.Net.Mail library.</p>";
                 WebSecurity.CreateUserAndAccount(profile.UserEmailAddress, GeneratedPassword);
                 Emailer.Send(profile.UserEmailAddress, string.Empty, string.Empty, "Greetings from Get Set Technology", BODY, false, false, null, null, MailPriority.High);
             }
