@@ -28,7 +28,7 @@ namespace WebRegister.Controllers
         public ActionResult CreateLogin(UserProfile profile)
         {
             bool IsLoggedIn = false;
-            //isCreated = loginService.CreateLogin(profile);
+            bool isCreated = loginService.CreateLogin(profile);
             string GeneratedPassword = System.Web.Security.Membership.GeneratePassword(8, 3);
             try
             {
