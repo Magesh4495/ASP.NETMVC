@@ -1,0 +1,87 @@
+﻿@model IEnumerable<Entities.Entity.UserProfile>
+
+@{
+    ViewBag.Title = "WelcomEmail";
+}
+
+<h2>WelcomEmail</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.UserId)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.UserFirstName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.UserLastName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.UserEmailAddress)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.UserPhoneNumber)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.UserPhoneCode)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.UserCountryId)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.UserCountryName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.LoginPassword)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.IsPasswordSent)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.UserId)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.UserFirstName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.UserLastName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.UserEmailAddress)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.UserPhoneNumber)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.UserPhoneCode)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.UserCountryId)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.UserCountryName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.LoginPassword)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.IsPasswordSent)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
+            @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
+            @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
+        </td>
+    </tr>
+}
+
+</table>
