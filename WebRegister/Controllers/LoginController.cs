@@ -33,11 +33,11 @@ namespace WebRegister.Controllers
             try
             {
                 String BODY =
-                  "<h1>Greetings " + profile.UserFirstName + "</h1>" +
-                  "<p>User Name   : " + profile.UserEmailAddress + "</p>" +
-                  "<p>Password   : " + profile.LoginPassword + "</p>" +
-                  "<p>This email was sent through the " +
-                  "using the .NET System.Net.Mail library.</p>";
+                  "<h1>Greetings...</h1></br> Hello "+ profile.UserFirstName +
+                  "<p>Thank you for Registering with Get Set.<br/>Please use the below Username and password to Login to your dashboard</p>"+
+                  "<p><b>User Name</b>   : " + profile.UserEmailAddress + "</p>" +
+                  "<p><b>Password </b>  : " + GeneratedPassword + "</p>" +
+                  "<p><br/>" +"Regards,</br>Get Set</p>";
                 WebSecurity.CreateUserAndAccount(profile.UserEmailAddress, GeneratedPassword);
                 Emailer.Send(profile.UserEmailAddress, string.Empty, string.Empty, "Greetings from Get Set Technology", BODY, false, false, null, null, MailPriority.High);
             }
@@ -45,7 +45,7 @@ namespace WebRegister.Controllers
             {
 
             }
-            IsLoggedIn = WebSecurity.Login(profile.UserEmailAddress, GeneratedPassword);
+            IsLoggedIn = WebSecurity.Login(profile.UserEmailAddress, GeneratedPassword,true);
             //if (isCreated)
             //{
             //    profile = loginService.fetchLogin(profile);
@@ -66,14 +66,15 @@ namespace WebRegister.Controllers
         [HttpPost]
         public ActionResult LoginVerify(UserProfile profile)
         {
-            //WebSecurity.Login(profile.UserEmailAddress, profile.LoginPassword, true);
-            if(IsValidLogin(profile))
+            bool IsLoggedIn = false;
+            IsLoggedIn = WebSecurity.Login(profile.UserEmailAddress, profile.LoginPassword, true);
+            if(IsLoggedIn)
             {
-                return View();
+                return RedirectToAction("DashBoard", "Home", null);
             }
             else
             {
-                return View();
+                return RedirectToAction("LogIn", "Home", null);
             }
         }
         public bool IsValidLogin(UserProfile profile)
@@ -91,40 +92,40 @@ namespace WebRegister.Controllers
             }
             return isValid;
         }
-        public void SendMessage(UserProfile profile)
-        {
-            using (var web = new System.Net.WebClient())
-            {
-                try
-                {
-                    string userName = "testingforemail12@gmail.com";
-                    string userPassword = "Q1w2e3r4t5y6!";
-                    string msgRecepient = profile.UserPhoneNumber.ToString();
-                    string msgText = "Welcome " + profile.UserFirstName + ",\nThank you for Creating an account with Magesh Application, \n Your User name is :" + profile.UserEmailAddress + " \n Password: " + profile.LoginPassword + "";
-                    string url = "http://smsc.vianett.no/v3/send.ashx?" +
-                        "src=" + msgRecepient +
-                        "&dst=" + msgRecepient +
-                        "&msg=" + System.Web.HttpUtility.UrlEncode(msgText, System.Text.Encoding.GetEncoding("ISO-8859-1")) +
-                        "&username=" + System.Web.HttpUtility.UrlEncode(userName) +
-                        "&password=" + userPassword;
-                    string result = web.DownloadString(url);
-                    //if (result.Contains("OK"))
-                    //{
-                    //    ("Sms sent successfully", "Message", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                    //}
-                    //else
-                    //{
-                    //    MessageBox.Show("Some issue delivering", "Message", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    //}
-                }
-                catch (Exception ex)
-                {
-                    //Catch and show the exception if needed. Donot supress. :)  
+        //public void SendMessage(UserProfile profile)
+        //{
+        //    using (var web = new System.Net.WebClient())
+        //    {
+        //        try
+        //        {
+        //            string userName = "testingforemail12@gmail.com";
+        //            string userPassword = "Q1w2e3r4t5y6!";
+        //            string msgRecepient = profile.UserPhoneNumber.ToString();
+        //            string msgText = "Welcome " + profile.UserFirstName + ",\nThank you for Creating an account with Magesh Application, \n Your User name is :" + profile.UserEmailAddress + " \n Password: " + profile.LoginPassword + "";
+        //            string url = "http://smsc.vianett.no/v3/send.ashx?" +
+        //                "src=" + msgRecepient +
+        //                "&dst=" + msgRecepient +
+        //                "&msg=" + System.Web.HttpUtility.UrlEncode(msgText, System.Text.Encoding.GetEncoding("ISO-8859-1")) +
+        //                "&username=" + System.Web.HttpUtility.UrlEncode(userName) +
+        //                "&password=" + userPassword;
+        //            string result = web.DownloadString(url);
+        //            //if (result.Contains("OK"))
+        //            //{
+        //            //    ("Sms sent successfully", "Message", MessageBoxButtons.OK, MessageBoxIcon.Information);
+        //            //}
+        //            //else
+        //            //{
+        //            //    MessageBox.Show("Some issue delivering", "Message", MessageBoxButtons.OK, MessageBoxIcon.Error);
+        //            //}
+        //        }
+        //        catch (Exception ex)
+        //        {
+        //            //Catch and show the exception if needed. Donot supress. :)  
 
-                }
-            }
+        //        }
+        //    }
 
-        }
+        //}
         
     }
 }
